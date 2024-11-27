@@ -16,7 +16,7 @@ $routes->post('admin/deleteDetails', 'Admin::deleteDetails');                // 
 // $routes->post('admin/getRecordDetails', 'Admin::getRecordDetails');
 // $routes->post('admin/updateRecord/(:num)', 'Admin::updateRecord/$id');
 $routes->post('admin/getRecordDetails', 'Admin::getRecordDetails'); // For fetching details
-$routes->post('admin/updateRecord', 'Admin::updateRecord');        // For updating details
+$routes->get('admin/get-data-for-update', 'Admin::updateRecord');        // For updating details
 
 
 // $routes->get('admin/testing', 'Admin::testing');

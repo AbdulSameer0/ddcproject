@@ -10,17 +10,17 @@ class ProgrammeModel extends Model
     protected $primaryKey = 'prog_id';     // Primary key of your table
     protected $allowedFields = ['progTitle', 'targetGroup', 'date', 'progDirector', 'dealingAsstt', 'progPdf', 'attandancePdf', 'materialLink', 'paymentdone'];  // Fields that are allowed to be inserted/updated
 
-    public function deleteRecord($prog_id)
+    public function update_user_details($id)
     {
-        // Perform the delete query
-        return $this->delete($prog_id);
-    }
+        $query = "select * from programme_info where prog_id='$id' ";
 
-    public function update_user_details($id, $data)
-    {
-        return $this->db->table('programme_info')
-            ->where('prog_id', $id)
-            ->update($data);
+        $result = $this->db->query($query);
+        if ($result) {
+            return $result->getResultArray();
+        }
+        // return $this->db->table('programme_info')
+        //     ->where('prog_id', $prog_id)
+        //     ->update($data);
     }
 }
 

@@ -178,172 +178,102 @@ class Admin extends BaseController
         return redirect()->to(site_url('/')); // Redirect to login page
     }
 
-   /* public function getRecordDetails()
+
+    public function getRecordDetails()
     {
         $id = $this->request->getPost('prog_id');
 
-        // Assuming you have a model to fetch data by ID
+        if (!$id) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Invalid request. Programme ID is missing.',
+            ]);
+        }
+
         $record = $this->programmeModel->find($id);
 
         if ($record) {
             return $this->response->setJSON([
                 'status' => 'success',
-                'data' => $record
+                'data' => $record,
             ]);
         } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Record not found']);
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Record not found.',
+            ]);
         }
     }
-    //    print_r($id);die;
-    //    echo '<pre>'; print_r($data); echo '</pre>';  die;
-
     public function updateRecord()
     {
-        $id = $this->request->getPost('prog_id');
-        $progTitle = $this->request->getPost('progTitle');
-        $targetGroup = $this->request->getPost('targetGroup');
-        $date = $this->request->getPost('date');
-        $progDirector = $this->request->getPost('progDirector');
-        $dealingAsstt = $this->request->getPost('dealingAsstt');
-        $materialLink = $this->request->getPost('materialLink');
-        $paymentdone = $this->request->getPost('paymentdone');
+        // echo "hh";
+        // die;
+        $id = $this->request->getGet('prog_id');
+        // echo $id;
+        // die;
 
-        // Handle file uploads (PDF)
-        $file = $this->request->getFile('progPdf');
-        $attendanceFile = $this->request->getFile('attandancePdf');
-
-        $progPdfName = null;
-        $attendancePdfName = null;
-
-        // Save files (if any)
-        if ($file && $file->isValid()) {
-            $progPdfName = $file->getRandomName();
-            $file->move(WRITEPATH . 'uploads/', $progPdfName);
-        }
-
-        if ($attendanceFile && $attendanceFile->isValid()) {
-            $attendancePdfName = $attendanceFile->getRandomName();
-            $attendanceFile->move(WRITEPATH . 'uploads/', $attendancePdfName);
-        }
-
-        // Prepare data for update
-        $updateData = [
-            'progTitle' => $progTitle,
-            'targetGroup' => $targetGroup,
-            'date' => $date,
-            'progDirector' => $progDirector,
-            'dealingAsstt' => $dealingAsstt,
-            'materialLink' => $materialLink,
-            'paymentdone' => $paymentdone,
-        ];
-
-        // Include file names only if files were uploaded
-        if ($progPdfName) {
-            $updateData['progPdf'] = $progPdfName;
-        }
-        if ($attendancePdfName) {
-            $updateData['attandancePdf'] = $attendancePdfName;
-        }
-
-        // Update record in the database
-        if ($this->programmeModel->update_user_details($id, $updateData)) {
-            return $this->response->setJSON(['status' => 'success']);
+        if (!$id) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Programme ID is missing hai bhai :( ']);
         } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Update failed']);
+            $result = $this->programmeModel->update_user_details($id);
+            // print_r($result);
+            // die;
+            echo json_encode($result);
         }
-    }*/
-
-     //    echo '<pre>'; print_r($data); echo '</pre>';  die;
-
-    /*public function testing()
-    {
-        return view('testingFile');
-
-    }*/
-    public function getRecordDetails()
-{
-    $id = $this->request->getPost('prog_id');
-
-    if (!$id) {
-        return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'Invalid request. Programme ID is missing.',
-        ]);
-    }
-
-    $record = $this->programmeModel->find($id);
-
-    if ($record) {
-        return $this->response->setJSON([
-            'status' => 'success',
-            'data' => $record,
-        ]);
-    } else {
-        return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'Record not found.',
-        ]);
-    }
-}
-public function updateRecord()
-{
-    $id = $this->request->getPost('prog_id');
-
-    if (!$id) {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Programme ID is missing hai bhai :( ']);
     }
 
     // Collect data from request
-    $progTitle = $this->request->getPost('progTitle');
-    $targetGroup = $this->request->getPost('targetGroup');
-    $date = $this->request->getPost('date');
-    $progDirector = $this->request->getPost('progDirector');
-    $dealingAsstt = $this->request->getPost('dealingAsstt');
-    $materialLink = $this->request->getPost('materialLink');
-    $paymentdone = $this->request->getPost('paymentdone');
+    // $progTitle = $this->request->getPost('progTitle');
+    // $targetGroup = $this->request->getPost('targetGroup');
+    // $date = $this->request->getPost('date');
+    // $progDirector = $this->request->getPost('progDirector');
+    // $dealingAsstt = $this->request->getPost('dealingAsstt');
+    // $materialLink = $this->request->getPost('materialLink');
+    // $paymentdone = $this->request->getPost('paymentdone');
 
     // Handle file uploads
-    $file = $this->request->getFile('progPdf');
-    $attendanceFile = $this->request->getFile('attandancePdf');
+    // $file = $this->request->getFile('progPdf');
+    // $attendanceFile = $this->request->getFile('attandancePdf');
 
-    $progPdfName = null;
-    $attendancePdfName = null;
+    // $progPdfName = null;
+    // $attendancePdfName = null;
 
-    if ($file && $file->isValid()) {
-        $progPdfName = $file->getRandomName();
-        $file->move(WRITEPATH . 'uploads/', $progPdfName);
-    }
+    // if ($file && $file->isValid()) {
+    //     $progPdfName = $file->getRandomName();
+    //     $file->move(WRITEPATH . 'uploads/', $progPdfName);
+    // }
 
-    if ($attendanceFile && $attendanceFile->isValid()) {
-        $attendancePdfName = $attendanceFile->getRandomName();
-        $attendanceFile->move(WRITEPATH . 'uploads/', $attendancePdfName);
-    }
+    // if ($attendanceFile && $attendanceFile->isValid()) {
+    //     $attendancePdfName = $attendanceFile->getRandomName();
+    //     $attendanceFile->move(WRITEPATH . 'uploads/', $attendancePdfName);
+    // }
 
-    // Prepare update data
-    $updateData = [
-        'progTitle' => $progTitle,
-        'targetGroup' => $targetGroup,
-        'date' => $date,
-        'progDirector' => $progDirector,
-        'dealingAsstt' => $dealingAsstt,
-        'materialLink' => $materialLink,
-        'paymentdone' => $paymentdone,
-    ];
+    // // Prepare update data
+    // $updateData = [
+    //     'progTitle' => $progTitle,
+    //     'targetGroup' => $targetGroup,
+    //     'date' => $date,
+    //     'progDirector' => $progDirector,
+    //     'dealingAsstt' => $dealingAsstt,
+    //     'materialLink' => $materialLink,
+    //     'paymentdone' => $paymentdone,
+    // ];
 
-    if ($progPdfName) {
-        $updateData['progPdf'] = $progPdfName;
-    }
 
-    if ($attendancePdfName) {
-        $updateData['attandancePdf'] = $attendancePdfName;
-    }
+    // if ($progPdfName) {
+    //     $updateData['progPdf'] = $progPdfName;
+    // }
 
-    if ($this->programmeModel->update($id, $updateData)) {
-        return $this->response->setJSON(['status' => 'success']);
-    } else {
-        return $this->response->setJSON(['status' => 'error', 'message' => 'Update failed.']);
-    }
-}
+    // if ($attendancePdfName) {
+    //     $updateData['attandancePdf'] = $attendancePdfName;
+    // }
+
+    // if ($this->programmeModel->update($id, $updateData)) {
+    //         return $this->response->setJSON(['status' => 'success']);
+    //     } else {
+    //         return $this->response->setJSON(['status' => 'error', 'message' => 'Update failed.']);
+    //     }
+    // }
 
 
 }

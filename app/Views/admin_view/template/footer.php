@@ -4,8 +4,8 @@
 <script src="<?php echo site_url(); ?>public/assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="<?php echo site_url(); ?>public/assets/js/plugins/smooth-scrollbar.min.js"></script>
 <script src="<?php echo site_url(); ?>public/assets/js/plugins/chartjs.min.js"></script>
-
-
+<!-- script by ritika -->
+<script src="<?php echo site_url(); ?>public/assets/js/plugins/function.js"></script>
 <!-- Bootstrap JS -->
 <script src="<?= site_url('public/assets/js/material-dashboard.min.js?v=3.2.0') ?>"></script>
 <!-- jQuery (required for Bootstrap 4 JS) -->
@@ -18,11 +18,6 @@
 <link href="<?php echo site_url('public/assets/css/sweetalert2.min.css'); ?>" rel="stylesheet">
 <!-- SweetAlert2 JS -->
 <script src="<?php echo site_url(); ?>public/assets/js/plugins/sweetalert2.min.js"></script>
-
-
-
-
-
 <!-- add form details by ritika -->
 <script>
     $(document).ready(function () {
@@ -115,7 +110,7 @@
                 title: 'Are you sure?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
+                confirmButtonText: 'Yes',
                 cancelButtonText: 'Cancel',
                 reverseButtons: true
             }).then((result) => {
@@ -212,53 +207,56 @@
 </script> -->
 
 <script>
-    $(document).ready(function () {
-        // Populate modal with data
-        $('.edit-button').click(function () {
-            const progId = $(this).data('id');
-            $.ajax({
-                url: '/admin/getRecordDetails',
-                type: 'POST',
-                data: { prog_id: progId },
-                success: function (response) {
-                    if (response.status === 'success') {
-                        const data = response.data;
-                        $('#prog_id').val(data.prog_id);
-                        $('#progTitle').val(data.progTitle);
-                        $('#targetGroup').val(data.targetGroup);
-                        $('#date').val(data.date);
-                        $('#progDirector').val(data.progDirector);
-                        $('#dealingAsstt').val(data.dealingAsstt);
-                        $('#materialLink').val(data.materialLink);
-                        $('#paymentdone').val(data.paymentdone);
-                    } else {
-                        alert(response.message);
-                    }
-                }
-            });
-        });
+    // $(document).ready(function () {
+    // Populate modal with data
+    // $('.edit_btn').click(function () {
 
-        // Update record on save
-        $('#update_Button').click(function () {
-            const formData = new FormData($('#update_form_details')[0]);
-            $.ajax({
-                url: '/admin/updateRecord',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    if (response.status === 'success') {
-                        alert('Record updated successfully!');
-                        $('#updateDetailsModal').modal('hide');
-                        location.reload();
-                    } else {
-                        alert(response.message || 'Failed to update record!');
-                    }
-                }
-            });
-        });
-    });
+
+    //     const progId = $(this).data('id');
+    //     alert(progId);
+    //     $.ajax({
+
+    //         url: '<?php //echo base_url() . "admin/get-data-for-update/" ?>',
+    //         dataType: 'json',
+    //         contentType: 'application/json',
+    //         type: 'GET',
+    //         data: {
+    //             prog_id: progId,
+
+    //         },
+    //         beforeSend: function () { },
+    //         success: function (data) {
+    //             console.log(data);
+    //         },
+    //         error: function (data) {
+    //             console.log(data);
+    //         }
+    //     }).done(function (data) {
+    //         console.log(data);
+    //         console.log(data[0]['prog_id']);
+    //         console.log(data[0]['progTitle']);
+
+    //         $("#prog_id").val(data[0]['prog_id']);
+    //         $("#progTitle").val(data[0]['progTitle']);
+
+
+    //         //         if (data == true) {
+    //         //             alert("ETC Application Accepted");
+    //         //             location.reload();
+    //         //         } else {
+
+    //         //             alert("Delivery date is not defined for this application");
+    //         //             window.location.href = '<?php //echo base_url() . "etc/etc-delivery-date/" ?>';
+    //         //             //alert("Status Not Updated");
+    //         //         }
+    //     });
+
+
+
+
+    // Update record on save
+    
+    // });
 </script>
 
 </html>

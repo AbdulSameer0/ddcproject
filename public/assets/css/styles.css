@@ -77,7 +77,7 @@
     }
    /* side navbar */
    #sidenav-main {
-    height: 100vh;
+    height: 92vh;
     /* Full viewport height */
     position: fixed;
     /* Make sure it's fixed to the left side */
@@ -88,12 +88,21 @@
     z-index: 1000;
     /* Adjust according to your layout */
 }
-
 .ps {
     height: 100%;
     /* Ensure the content area inside also fills the height */
     /* overflow-y: auto; */
     /* Enable scrolling if content overflows */
+}
+
+/***************************this style for logo ***************************************/
+ /* for image set on background */
+.custom-background {
+    background-image: url('public/assets/img/logoSide.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 400px;
+    /* Ensure it's visible */
 }
 
 
